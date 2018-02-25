@@ -17,21 +17,26 @@ def vid_2_frame(input_loc, output_loc):
     count = 0
     print ("Converting video..\n")
     # Start converting the video
+    count = 0;
+    num = 5; #skip no. of frames
     while cap.isOpened():
         # Extract the frame
         ret, frame = cap.read()
-        if ret == True:
-            # Write the results back to output location.
-            cv2.imwrite(output_loc + "/%#05d.jpg" % (count+1), frame)
-            count = count + 1
-        else:
-            # Log the time again
-            time_end = time.time()
-            # Release the feed
-            cap.release()
-            # Print stats
-            print ("Done extracting frames.\n%d frames extracted" % count)
-            print ("It took %d seconds forconversion." % (time_end-time_start))
-            break
+        if (count % num == 0):
+            if ret == True:
+                # Write the results back to output location.
+                cv2.imwrite(output_loc + "/%#05d.jpg" % (count+1), frame)
+                count = count + 1
+            else:
+                # Log the time again
+                time_end = time.time()
+                # Release the feed
+                cap.release()
+                # Print stats
+                print ("Done extracting frames.\n%d frames extracted" % count)
+                print ("It took %d seconds forconversion." % (time_end-time_start))
+                break
 
-vid_2_frame("big_buck_bunny_720p_5mb.mp4","Output")
+        count += 1
+
+vid_2_frame("demo_vid.mp4","Output")

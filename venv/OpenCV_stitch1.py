@@ -1,8 +1,15 @@
 import cv2
 
-stitcher = cv2.createStitcher(False)
-foo = cv2.imread("Output/00001.png")
-bar = cv2.imread("Output/00002.png")
-result = stitcher.stitch((foo,bar))
+try:
+    stitcher = cv2.createStitcher(False)
+    foo = cv2.imread("Output/00001.jpg")
+    bar = cv2.imread("Output/00266.jpg")
 
-cv2.imwrite("result.jpg", result[1])
+    #foo = cv2.imread("result.jpg")
+    #bar = cv2.imread("result2.jpg")
+
+    result = stitcher.stitch((foo,bar))
+    cv2.imwrite("result2.jpg", result[1])
+
+except Exception as e:
+    print(e)
